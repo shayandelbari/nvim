@@ -55,6 +55,10 @@ return {
   {
     "nvimtools/none-ls.nvim",
     optional = true,
+    cond = function()
+      local cwd = vim.fn.getcwd()
+      return vim.fn.glob(cwd .. "/*.csproj") ~= "" or vim.fn.glob(cwd .. "/*.sln") ~= ""
+    end,
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
